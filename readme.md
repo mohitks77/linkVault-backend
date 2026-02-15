@@ -235,14 +235,9 @@ Responses: `200` binary or `403/404/410` as appropriate.
 
 ## Next steps
 
-- Use a Supabase service role key for server-to-Supabase operations that require elevated privileges and keep it out of client bundles.
-- Add authentication (like access tokens) or signed upload URLs to avoid anonymous uploads for stronger user restrictions.
-- Move URL-building logic into a helper/service so the controllers only return IDs.
-- Add request validation (Joi/Zod) to centralize and simplify input checks.
-- Add unit/integration tests for controllers and middleware.
-- Add cache (like redis) for high frequency APIs like `/api/pastes/:slug/preview`.
-
-## Troubleshooting
-
-- 500 responses: inspect server logs (the error middleware prints stack traces to the console). Make sure `SUPABASE_*` env vars are correct.
-- File not found on download: ensure the object exists in the `pastes` storage bucket and the `storage_path` column matches the object key.
+- Using a Supabase service role key for server-to-Supabase operations that require elevated privileges and keep it out of client bundles.
+- Adding authentication (like access tokens) or signed upload URLs to avoid anonymous uploads for stronger user restrictions.
+- Moving URL-building logic into a helper/service so the controllers only return IDs.
+- Adding request validation (Joi/Zod) to centralize and simplify input checks.
+- Adding unit/integration tests for controllers and middleware.
+- Adding cache (like redis) for high frequency APIs like `/api/pastes/:slug/preview`.
