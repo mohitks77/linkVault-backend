@@ -97,7 +97,7 @@ Service layer
 There are two primary persistence locations:
 
 - Supabase Storage bucket named `pastes` — holds the binary blobs.
-- Supabase Postgres table named `pastes` — holds metadata with columns used in the code (these names are referenced directly from controllers):
+- Supabase Postgres table named `pastes` — holds metadata with these columns:
   - `slug` (string) — short random id used in URLs
   - `user_id` (string)
   - `filename` (string)
@@ -233,27 +233,16 @@ Responses: `200` binary or `403/404/410` as appropriate.
 - This service is stateless: file blobs live in Supabase storage, metadata in Supabase Postgres. Horizontal scaling is straightforward.
 - For production, run behind a reverse proxy (NGINX) or on a platform like Fly/Vercel/Heroku that supports Node services. Ensure environment variables are set in deploy environment, and mount appropriate TLS.
 
-## Recommended improvements (next steps)
+## Next steps
 
 - Use a Supabase service role key for server-to-Supabase operations that require elevated privileges and keep it out of client bundles.
-- Add authentication or signed upload URLs to avoid anonymous uploads if you want stronger user restrictions.
+- Add authentication (like access tokens) or signed upload URLs to avoid anonymous uploads for stronger user restrictions.
 - Move URL-building logic into a helper/service so the controllers only return IDs.
 - Add request validation (Joi/Zod) to centralize and simplify input checks.
 - Add unit/integration tests for controllers and middleware.
+- Add cache (like redis) for high frequency APIs like `/api/pastes/:slug/preview`.
 
 ## Troubleshooting
 
 - 500 responses: inspect server logs (the error middleware prints stack traces to the console). Make sure `SUPABASE_*` env vars are correct.
 - File not found on download: ensure the object exists in the `pastes` storage bucket and the `storage_path` column matches the object key.
-
-## Files to open first
-
-- `src/app.js` — wiring (middleware + routes)
-- `src/routes/paste.routes.js` — request shape and multer config
-- `src/controllers/paste.controller.js` — paste lifecycle and API behavior
-
-If you want, I can also:
-
-- add a Postman collection / OpenAPI spec from the source,
-- create a `.env.example` file from the current `.env`, or
-- add basic integration tests that exercise the main upload/download flows.
