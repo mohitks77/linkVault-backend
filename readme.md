@@ -1,4 +1,4 @@
-# pastebin-backend
+# LinkVault-backend
 
 This repository is the small Express-based backend that powers the `pastebin-UI` frontend. It is intentionally compact: Supabase is used for object storage and as the primary database, and Express routes map directly to purpose-built controllers.
 
