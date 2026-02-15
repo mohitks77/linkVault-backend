@@ -231,7 +231,7 @@ Responses: `200` binary or `403/404/410` as appropriate.
 ## Deployment & scaling
 
 - This service is stateless: file blobs live in Supabase storage, metadata in Supabase Postgres. Horizontal scaling is straightforward.
-- For production, run behind a reverse proxy (NGINX) or on a platform like Fly/Vercel/Heroku that supports Node services. Ensure environment variables are set in deploy environment, and mount appropriate TLS.
+- For production, running behind a reverse proxy (NGINX) or on a platform like Fly/Vercel/Heroku that supports Node services can be done. Appropriate environment variables are to be set in deployment environment, and appropriate TLS.
 
 ## Next steps
 
