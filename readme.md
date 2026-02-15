@@ -217,6 +217,19 @@ Responses: `200` binary or `403/404/410` as appropriate.
   - `404` — paste not found
   - `500` — storage or DB delete failure
 
+## Design Decisions
+
+- User has to create an account for uploding / sharing files.
+- A file once uploaded can only be deleted by the user who uploaded it.
+- File can only be viewed by another user if the file is active / if the view count < max_view count.
+- For file naming convention, text is saved as paste.txt in DB, while the pdf files have their original name.
+
+## Limitations
+
+- All the routes are public (major security flaw).
+- Only pdf files can be uploaded right now. Support can be extended for word, excel etc.
+- S3 bucket of supabase and Database is kept public to avoid authentication issues. It should be handled for better security.
+
 ## Operational notes & behavior details
 
 - Storage: files are uploaded to the Supabase storage bucket named `pastes` at path `uploads/{slug}-{originalname}`.
